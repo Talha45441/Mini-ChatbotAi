@@ -1,0 +1,26 @@
+import json
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+class Chatbot:
+    def __init__(self, dataset_path):
+        # JSON dosyasını oku
+        with open(dataset_path, 'r', encoding='utf-8') as f:
+            self.data = json.load(f)
+
+        # Soruları listele
+        self.questions = [item['question'] for item in self.data]
+        self.answers = [item['answer'] for item in self.data]
+
+        # TF-IDF vectorizer
+        self.vectorizer = TfidfVectorizer().fit(self.questions)
+        self.question_vectors = self.vectorizer.transform(self.questions)
+
+    def get_response(self, user_input):
+        # Kullanıcı mesajını vektöre çevir
+        user_vec = self.vectorizer.transform([user_input])
+        # Benzerlik hesapla
+        similarities = cosine_similarity(user_vec, self.question_vectors)
+        # En yüksek benzerlik indexi
+        best_idx = similarities.argmax()
+        return self.answers[best_idx]
