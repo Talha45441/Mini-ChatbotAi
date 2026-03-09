@@ -1,0 +1,16 @@
+from model.chatbot_model import Chatbot
+
+def main():
+    bot = Chatbot('dataset/conversations.json')
+    print("Chatbot is ready! Type 'exit' to quit.")
+    
+    while True:
+        user_input = input("You: ").strip().lower()
+        if user_input == 'exit':
+            print("Bot: Goodbye!")
+            break
+        response = bot.get_response(user_input)
+        print(f"Bot: {response}")
+
+if __name__ == "__main__":
+    main()
