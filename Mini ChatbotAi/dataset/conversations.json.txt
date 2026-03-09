@@ -1,0 +1,6 @@
+[
+  {"question": "hello", "answer": "Hi! How can I help you?"},
+  {"question": "how are you", "answer": "I'm fine, thanks!"},
+  {"question": "what is your name", "answer": "I am a chatbot."},
+  {"question": "bye", "answer": "Goodbye! Have a nice day."}
+]
